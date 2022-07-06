@@ -1,9 +1,9 @@
-import React from 'react'
+import { createContext } from 'react'
 
-export const AuthContext = React.createContext(null);
+// Initialize Context
+export const AuthContext = createContext({});
 
 export const AuthProvider = () => {
-  return (
-    <div>AuthProvider</div>
-  )
+
+
 }

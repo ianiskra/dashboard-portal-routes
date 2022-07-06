@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export default function Login() {
+
     return (
         <div>
             <h2>Login Page</h2>
@@ -9,5 +9,5 @@ export default function Login() {
             <Link to="/register">Register</Link>
             <Link to="/forgot">Forgot Password</Link>
         </div>
-    )
+    );
 }
