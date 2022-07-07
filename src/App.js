@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 // UnAuthenticated
 import Login from "./UnAuthenticated/Login/Login";
 import Register from "./UnAuthenticated/Register/Register";
@@ -8,16 +9,18 @@ import Forgot from "./UnAuthenticated/Forgot/Forgot";
 import Dashboard from "./Authenticated/Dashboard/Dashboard";
 
 // To provide its Context to all child components
-import { AuthContext } from "./Context/AuthProvider";
+import { AuthContext, AuthProvider } from "./Context/AuthProvider";
 
 
 function App() {
 
+  const [user, setUser] = useState(AuthProvider());
 
+  console.log(user);
   return (
     <>
       {/* Pass in a value through Provider from Higher Order */}
-      <AuthContext.Provider>
+      <AuthContext.Provider value={user}>
         <Routes>
 
           {/* Public Routes */}
