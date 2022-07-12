@@ -1,20 +1,46 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { useContext } from "react";
 
 export default function Login() {
 
     const user = useContext(AuthContext);
+    const navigate = useNavigate();
+
+
+    // Logic to Check Login
+    // login would set the Context
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+
+        // Call Login function
+        let isLoggedIn = user.login(user);
+        
+        if(isLoggedIn){
+            navigate("api/dashboard");
+        }
+
+    }
 
     return (
         <div>
             <h2>Login Page</h2>
-            <form>
+            <form onSubmit={handleLogin}>
                 <label>
-                    Name:
+                    Username:
                     {/* Input Box */}
-                    <input type="text" name={user.email} onChange={(e) => user.setEmail(e.target.value)} />
-                    <input type="password" name="password" />
+                    <input
+                        type="text"
+                        name={user.email}
+                        onChange={(e) => user.setEmail(e.target.value)}
+                    />
+                    Password:
+                    <input
+                        type="password"
+                        name={user.password}
+                        onChange={(e) => user.setPassword(e.target.value)}
+                    />
                 </label>
                 {/* Button */}
                 <input type="submit" value="Submit" />

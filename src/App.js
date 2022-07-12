@@ -10,29 +10,31 @@ import Dashboard from "./Authenticated/Dashboard/Dashboard";
 
 // To provide its Context to all child components
 import { AuthContext, AuthProvider } from "./Context/AuthProvider";
-
+import { ProtectedRoute } from "./Authenticated/ProtectedRoute/ProtectedRoute";
+import Inventory from "./Authenticated/Inventory/Inventory";
 
 function App() {
+  // const [user, setUser] = useState(new User);
 
-  const [user, setUser] = useState(AuthProvider());
-
-  console.log(user);
   return (
     <>
       {/* Pass in a value through Provider from Higher Order */}
-      <AuthContext.Provider value={user}>
+      <AuthProvider>
         <Routes>
 
           {/* Public Routes */}
           <Route index element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot" element={<Forgot />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgot" element={<Forgot />} />
 
           {/* Protected Route */}
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="api" element={<ProtectedRoute />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="inventory" element={<Inventory />} />
+          </Route>
         </Routes>
-      </AuthContext.Provider>
+      </AuthProvider>
     </>
   );
 };
