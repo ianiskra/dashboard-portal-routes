@@ -1,9 +1,9 @@
 // https://reactjs.org/docs/state-and-lifecycle.html
 
-import React from 'react';
+
 
 export default class User {
-
+    
     // Propties for User
     firstname;
     lastname;
@@ -13,7 +13,9 @@ export default class User {
     token;
     tokenExpiration;
 
-    /* Methods that set the Propties for Users */
+    /* Methods that are Setting the properties of User(s)
+    Setters are value that can be assigned
+    */
     setFirstname = (firstname) => {
         console.log({ firstname });
         this.firstname = firstname;
@@ -32,6 +34,8 @@ export default class User {
         console.log({ email });
         this.email = email;
     }
+
+    /* How to switch out when connecting to the Database instead of assigning a value. Would be using the fetch() from API */
     setPassword = (password) => {
         console.log({ password });
         this.password = password;
@@ -48,27 +52,38 @@ export default class User {
         this.setTokenExpiration = setTokenExpiration;
     }
 
+    //
     setExpirationTime = (setExpirationTime) => {
         console.log({ setExpirationTime });
         this.setExpirationTime = setExpirationTime;
     }
 
-    login = async(user) => {
+    // User is an instance
+    login = async (user) => {
 
         // Check Correct Login Credentilas
         if (user.email === "ian@aaa.com" && user.password === "admin") {
-
             console.log(user.email);
 
-            // Token value
+            // Adding Token to correct user
             user.token = "AAA";
 
-            // Expiration after session
+            // Make session expiration after session - 2 minutes based on present date
             user.tokenExpiration = new Date();
-            user.tokenExpiration.setDate()
+            user.tokenExpiration.setMinutes(user.tokenExpiration.getMinutes() + 2);
+
+            console.log(user.tokenExpiration);
 
             user.firstname = "Ian";
             user.lastname = "Iskra";
+
+            // Session Storage: https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage#basic_usage
+            sessionStorage.setItem("userSession", JSON.stringify(user));
+            
+            
+            console.log(sessionStorage.getItem("userSession"));
+
+            
 
             // Display Token
             console.log(user.token);

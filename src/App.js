@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 // UnAuthenticated
 import Login from "./UnAuthenticated/Login/Login";
 import Register from "./UnAuthenticated/Register/Register";
@@ -14,7 +14,16 @@ import { ProtectedRoute } from "./Authenticated/ProtectedRoute/ProtectedRoute";
 import Inventory from "./Authenticated/Inventory/Inventory";
 
 function App() {
-  // const [user, setUser] = useState(new User);
+  
+  // const [user, setUser] = useContext(AuthContext);
+
+  // useEffect(() => {
+  //   //
+  //   if(sessionStorage.getItem("userSession") !== null){
+  //     setUser(JSON.parse(sessionStorage.getItem("userSession")))
+  //   }
+  // }, [])
+  
 
   return (
     <>

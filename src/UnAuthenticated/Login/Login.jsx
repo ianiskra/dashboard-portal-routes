@@ -1,10 +1,10 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { useContext } from "react";
 
 export default function Login() {
 
-    const user = useContext(AuthContext);
+    const [user, setUser] = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -14,11 +14,11 @@ export default function Login() {
         e.preventDefault();
 
 
-        // Call Login function
+        // Call Login function - would eventually be retrieving from Database
         let isLoggedIn = user.login(user);
         
         if(isLoggedIn){
-            navigate("api/dashboard");
+            navigate("/api/dashboard");
         }
 
     }

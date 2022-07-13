@@ -6,6 +6,16 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({children}) => {
 
+    // // Instance of User
+    const [user, setUser] = useState(new User());
+
+    // useEffect(() => {
+    //   //
+    //   if(sessionStorage.getItem("userSession") !== null){
+    //     setUser(JSON.parse(sessionStorage.getItem("userSession")))
+    //   }
+    // }, [])
+
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
     // const [token, setToken] = useState("AAA");
@@ -30,7 +40,7 @@ export const AuthProvider = ({children}) => {
     
     return (
         <div>
-            <AuthContext.Provider value={new User()}>
+            <AuthContext.Provider value={[user, setUser]}>
                 {children}
             </AuthContext.Provider>
         </div>
