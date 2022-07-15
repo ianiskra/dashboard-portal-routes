@@ -9,20 +9,13 @@ import Forgot from "./UnAuthenticated/Forgot/Forgot";
 import Dashboard from "./Authenticated/Dashboard/Dashboard";
 
 // To provide its Context to all child components
-import { AuthContext, AuthProvider } from "./Context/AuthProvider";
+import { AuthProvider } from "./Context/AuthProvider";
 import { ProtectedRoute } from "./Authenticated/ProtectedRoute/ProtectedRoute";
 import Inventory from "./Authenticated/Inventory/Inventory";
 
 function App() {
   
-  // const [user, setUser] = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   //
-  //   if(sessionStorage.getItem("userSession") !== null){
-  //     setUser(JSON.parse(sessionStorage.getItem("userSession")))
-  //   }
-  // }, [])
   
 
   return (

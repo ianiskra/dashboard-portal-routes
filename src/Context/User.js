@@ -1,97 +1,49 @@
 // https://reactjs.org/docs/state-and-lifecycle.html
 
-
-
 export default class User {
     
-    // Propties for User
+    // Properties for User
     firstname;
     lastname;
-    username;
     email;
-    password;
     token;
     tokenExpiration;
 
-    /* Methods that are Setting the properties of User(s)
-    Setters are value that can be assigned
-    */
-    setFirstname = (firstname) => {
-        console.log({ firstname });
-        this.firstname = firstname;
-    }
-
-    setLastname = (lastname) => {
-        this.lastname = lastname;
-    }
-
-    setUsername = (username) => {
-        console.log({ username });
-        this.username = username;
-    }
-
-    setEmail = (email) => {
-        console.log({ email });
-        this.email = email;
-    }
-
-    /* How to switch out when connecting to the Database instead of assigning a value. Would be using the fetch() from API */
-    setPassword = (password) => {
-        console.log({ password });
-        this.password = password;
-    }
-
-    setToken = (token) => {
-        console.log({ token });
-        this.token = token;
-    }
-
-    // Determine how long I'm logged in
-    setTokenExpiration = (setTokenExpiration) => {
-        console.log({ setTokenExpiration });
-        this.setTokenExpiration = setTokenExpiration;
-    }
-
-    //
-    setExpirationTime = (setExpirationTime) => {
-        console.log({ setExpirationTime });
-        this.setExpirationTime = setExpirationTime;
-    }
-
-    // User is an instance
-    login = async (user) => {
-
+    // user param to import the Setters
+    async login (email, password) {
         // Check Correct Login Credentilas
-        if (user.email === "ian@aaa.com" && user.password === "admin") {
-            console.log(user.email);
+        if (email === "ian@aaa.com" && password === "admin") {
+            // console.log(email);
 
             // Adding Token to correct user
-            user.token = "AAA";
+            this.token = "AAA";
+            console.log(this.token);
 
             // Make session expiration after session - 2 minutes based on present date
-            user.tokenExpiration = new Date();
-            user.tokenExpiration.setMinutes(user.tokenExpiration.getMinutes() + 2);
+            this.tokenExpiration = new Date();
+            this.tokenExpiration.setMinutes(this.tokenExpiration.getMinutes() + 2);
 
-            console.log(user.tokenExpiration);
+            console.log(this.tokenExpiration);
 
-            user.firstname = "Ian";
-            user.lastname = "Iskra";
+            this.firstname = "Ian";
+            this.lastname = "Iskra";
+            this.email = email;
 
             // Session Storage: https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage#basic_usage
-            sessionStorage.setItem("userSession", JSON.stringify(user));
-            
-            
+            sessionStorage.setItem("userSession", JSON.stringify(this));
             console.log(sessionStorage.getItem("userSession"));
 
             
 
-            // Display Token
-            console.log(user.token);
 
             return true;
         }
         else {
             return null;
         }
+    }
+
+    isAuthenticated() {
+        return !!this.token;
     }
 }

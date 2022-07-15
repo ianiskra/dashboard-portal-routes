@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import { useNavigate, Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
-// The redirectPath is redirecting them to the login page
-
 /*
 How do I get passed the authentication now?
 https://www.robinwieruch.de/react-router-private-routes/
@@ -17,7 +15,7 @@ export const ProtectedRoute = () => {
 
     /* Check for Valid Token from Valid Login */
     // If incorrect token
-    if (!user.token) {
+    if (!user.isAuthenticated()) {
         // Redir to Login Page
         return (<Navigate to="/login" />);
     }
