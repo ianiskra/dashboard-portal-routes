@@ -5,7 +5,7 @@ export default function Inventory() {
   return (
     <div>
         <h2>Inventory Page</h2>
-        <Link to="/api/dashboard">Dashboard</Link>
+        <Link to="/dashboard">Dashboard</Link>
     </div>
   )
 }

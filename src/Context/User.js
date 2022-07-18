@@ -1,5 +1,7 @@
 // https://reactjs.org/docs/state-and-lifecycle.html
 
+import { useNavigate } from "react-router-dom";
+
 export default class User {
     
     // Properties for User
@@ -8,6 +10,12 @@ export default class User {
     email;
     token;
     tokenExpiration;
+    timer;
+
+    // Constructor
+    constructor(){
+        Object.assign(this, JSON.parse(sessionStorage.getItem('userSession')));
+    }
 
     // user param to import the Setters
     async login (email, password) {
@@ -20,8 +28,7 @@ export default class User {
             console.log(this.token);
 
             // Make session expiration after session - 2 minutes based on present date
-            this.tokenExpiration = new Date();
-            this.tokenExpiration.setMinutes(this.tokenExpiration.getMinutes() + 2);
+            this.refresh();
 
             console.log(this.tokenExpiration);
 
@@ -43,7 +50,19 @@ export default class User {
         }
     }
 
-    isAuthenticated() {
-        return !!this.token;
+    isAuthenticated() {    
+        // When it's NOT NOT token and instance of Date is <= the actual Token Expiration, let's return that info    
+        return !!this.token && new Date().getTime() <= this.tokenExpiration;
+    }
+
+    refresh() {
+        const expirationTime = (1000 * 5);
+
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            window.location.reload(false);
+        }, expirationTime);
+
+        this.tokenExpiration = new Date().getTime() + expirationTime;
     }
 }

@@ -31,7 +31,7 @@ function App() {
           <Route path="forgot" element={<Forgot />} />
 
           {/* Protected Route */}
-          <Route path="api" element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="inventory" element={<Inventory />} />
           </Route>

@@ -29,7 +29,7 @@ export default function Login() {
         const isLoggedIn = user.login(username, password);
 
         if (isLoggedIn) {
-            navigate("/api/dashboard");
+            navigate("/dashboard");
         }
         else {
             setMessage("Please use a valid Username and/or Password.");

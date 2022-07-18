@@ -21,6 +21,8 @@ export const ProtectedRoute = () => {
     }
     // Otherwise navigate to dashboard
     else {
+        user.refresh();
+        
         return (
             <div>
                 {/* Render Chilren Routes */}
