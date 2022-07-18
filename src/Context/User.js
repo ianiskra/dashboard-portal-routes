@@ -1,9 +1,7 @@
 // https://reactjs.org/docs/state-and-lifecycle.html
 
-import { useNavigate } from "react-router-dom";
-
 export default class User {
-    
+
     // Properties for User
     firstname;
     lastname;
@@ -12,13 +10,14 @@ export default class User {
     tokenExpiration;
     timer;
 
-    // Constructor
-    constructor(){
+    /* Constructor for assigning the initial state of the Login with properties overwritten*/
+    constructor() {
+        // saving info needed for session
         Object.assign(this, JSON.parse(sessionStorage.getItem('userSession')));
     }
 
     // user param to import the Setters
-    async login (email, password) {
+    async login(email, password) {
         // Check Correct Login Credentilas
         if (email === "ian@aaa.com" && password === "admin") {
             // console.log(email);
@@ -28,7 +27,7 @@ export default class User {
             console.log(this.token);
 
             // Make session expiration after session - 2 minutes based on present date
-            this.refresh();
+            this.pageRefresh();
 
             console.log(this.tokenExpiration);
 
@@ -40,7 +39,7 @@ export default class User {
             sessionStorage.setItem("userSession", JSON.stringify(this));
             console.log(sessionStorage.getItem("userSession"));
 
-            
+
 
 
             return true;
@@ -50,19 +49,24 @@ export default class User {
         }
     }
 
-    isAuthenticated() {    
+    // 
+    isAuthenticated() {
         // When it's NOT NOT token and instance of Date is <= the actual Token Expiration, let's return that info    
         return !!this.token && new Date().getTime() <= this.tokenExpiration;
     }
 
-    refresh() {
-        const expirationTime = (1000 * 5);
+    // Auto logout
+    pageRefresh() {
+        // Create expiration time after 10 seconds
+        const expirationTime = (1000 * 10);
 
+        // Expire token on given day based on expirationTime
+        this.tokenExpiration = new Date().getTime() + expirationTime;
+        
         clearTimeout(this.timer);
         this.timer = setTimeout(() => {
             window.location.reload(false);
         }, expirationTime);
 
-        this.tokenExpiration = new Date().getTime() + expirationTime;
     }
 }

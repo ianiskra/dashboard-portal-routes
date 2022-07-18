@@ -19,10 +19,10 @@ export const ProtectedRoute = () => {
         // Redir to Login Page
         return (<Navigate to="/login" />);
     }
-    // Otherwise navigate to dashboard
+
     else {
-        user.refresh();
-        
+        user.pageRefresh();
+
         return (
             <div>
                 {/* Render Chilren Routes */}
